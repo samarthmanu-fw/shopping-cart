@@ -1,0 +1,32 @@
+<h1>Users#new</h1>
+<%= form_for(@user) do |f| %>
+  <% if @user.errors.any? %>
+    <div>
+      <ul>
+        <% @user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div>
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div>
+    <%= f.label :password %><br>
+    <%= f.password_field :password %>
+  </div>
+  <div>
+    <%= f.label :password_confirmation %><br>
+    <%= f.password_field :password_confirmation %>
+  </div>
+  <div class="field">
+    <%= f.label "is_admin" %> <br />
+<!--    <%#= f.check_box :is_admin, {}, true, false %> <br />-->
+    <%= f.text_field :is_admin %>
+  </div>
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>

@@ -1,0 +1,13 @@
+<%= form_for(@order) do |f| %>
+<!--  <p>-->
+<!--    <%#= f.label :user_id %><br>-->
+    <%#= f.number_field :user_id, value: , required: true, autofocus: true, readonly: true %>
+<!--  </p>-->
+  <p>
+    <%= f.label :card_no %><br>
+    <%= f.text_area :card_no %>
+  </p>
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>

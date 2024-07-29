@@ -1,0 +1,10 @@
+<h2>Order</h2>
+
+<p>User ID: <%= @order.user_id %></p>
+<p>Card No: <%= @order.card_no %></p>
+<p>Line Items: </p>
+<ul>
+  <% @order.line_items.each do |item| %>
+    <li><%= item.quantity %> x <%= item.product.name %></li>
+  <% end %>
+</ul>
