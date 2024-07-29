@@ -7,10 +7,11 @@ class OrdersController < ApplicationController
     @order = Order.find(params[:id])
   end
 
-
   def showByUser
-    @orders = Order.find_by_user_id(user_id: params[:user_id])
+    #@order = Order.find(params[:id])
+    @order = Order.find_by(:user_id => params[:id])
   end
+
 
   def new
     @order = Order.new

@@ -41,13 +41,6 @@ class LineItemsController < ApplicationController
     redirect_to cart_path(@current_cart)
   end
 
-  private
-  def increase_quantity
-    # params.require(:line_item)
-    @line_item.quantity += 1
-    @line_item.save
-  end
-
   def reduce_quantity
     @line_item = LineItem.find(params[:id])
     if @line_item.quantity > 1
@@ -56,6 +49,15 @@ class LineItemsController < ApplicationController
     @line_item.save
     redirect_to cart_path(@current_cart)
   end
+
+  private
+  def increase_quantity
+    # params.require(:line_item)
+    @line_item.quantity += 1
+    @line_item.save
+  end
+
+
 
   private
   def line_item_params

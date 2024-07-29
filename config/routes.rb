@@ -43,9 +43,9 @@ Rails.application.routes.draw do
   Rails.application.routes.draw do
   get 'orders/index'
 
-  get 'orders/:user_id' => "orders#showByUser", as: "orders_by_user"
-
   get 'orders/show'
+
+  get 'orders/user/:id' => "orders#showByUser" , as: "orders_by_user"
 
   get 'orders/new'
 
