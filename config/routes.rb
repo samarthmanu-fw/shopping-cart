@@ -45,7 +45,9 @@ Rails.application.routes.draw do
 
   get 'orders/show'
 
-  get 'orders/user/:id' => "orders#showByUser" , as: "orders_by_user"
+  get 'orders/users/:id' => "orders#show_by_user", as: "orders_by_user"
+
+  get 'orders/users/:id/summary/:limit' => "orders#show_summary_by_user", as: "orders_summary_by_user"
 
   get 'orders/new'
 

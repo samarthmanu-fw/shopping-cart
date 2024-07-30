@@ -1,0 +1,6 @@
+<h2>Top Orders By User</h2>
+<% @items.each do |item| %>
+  <!--<p>User ID: <%#= item.user_id %></p>-->
+  <p>Product: <%= item.product_id %></p>
+  <p>Total Order Qty: <%= item.sum_line_items %></p>
+<%end %>

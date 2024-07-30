@@ -7,11 +7,21 @@ class OrdersController < ApplicationController
     @order = Order.find(params[:id])
   end
 
-  def showByUser
-    #@order = Order.find(params[:id])
-    @order = Order.find_by(:user_id => params[:id])
+  def show_by_user
+    @orders = Order.where(:user_id => params[:id])
   end
 
+  def show_summary_by_user
+    @items = Order.where(:user_id => params[:id])
+         .joins(:line_items)
+         .group('line_items.product_id')
+         .select("orders.user_id, line_items.product_id, sum(line_items.quantity) as sum_line_items")
+         .order("sum_line_items DESC")
+
+    if params[:limit]
+      @items = @items.limit(params[:limit])
+    end
+  end
 
   def new
     @order = Order.new

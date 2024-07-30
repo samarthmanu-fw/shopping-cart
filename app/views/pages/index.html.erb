@@ -2,8 +2,9 @@
   <h1>Welcome, <%= current_user.name %></h1>
   <%= link_to 'Log out', user_session_path(current_user), data: { method: :delete } %><br>
   <%= link_to 'Start Shopping', products_path %><br>
-  <%= link_to 'All order history', orders_index_path %><br>
-  <%= link_to 'My order history', orders_by_user_path(current_user), data: { method: :get } %><br>
+  <%= link_to 'All orders (admin)', orders_index_path %><br>
+  <%= link_to 'My orders', orders_by_user_path(current_user) %><br>
+  <%= link_to 'My Top 3 orders', orders_summary_by_user_path(current_user, 3) %><br>
 <% else %>
   <h1>Welcome page</h1>
   <%= link_to 'Login', new_user_session_path %><br>
