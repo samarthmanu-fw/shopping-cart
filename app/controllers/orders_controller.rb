@@ -1,6 +1,8 @@
 class OrdersController < ApplicationController
+
+  before_action :check_login
   def index
-    @orders = Order.all
+      @orders = Order.all
   end
 
   def show
@@ -12,15 +14,19 @@ class OrdersController < ApplicationController
   end
 
   def show_summary_by_user
-    @items = Order.where(:user_id => params[:id])
-         .joins(:line_items)
-         .group('line_items.product_id')
-         .select("orders.user_id, line_items.product_id, sum(line_items.quantity) as sum_line_items")
-         .order("sum_line_items DESC")
 
-    if params[:limit]
-      @items = @items.limit(params[:limit])
-    end
+    @items = nil
+    @items = Order.where(:user_id => params[:id]) unless params[:id] == 'all'
+
+    @items = Order
+               .joins('INNER JOIN line_items ON orders.id = line_items.order_id')
+               .joins('INNER JOIN products ON products.id = line_items.product_id')
+               .group('line_items.product_id')
+               .select("line_items.product_id, products.name, sum(line_items.quantity) as sum_line_items")
+               .order("sum_line_items DESC")
+
+
+
   end
 
   def new

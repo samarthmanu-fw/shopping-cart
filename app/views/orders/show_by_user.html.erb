@@ -1,6 +1,9 @@
 <h2>All Orders By User</h2>
-<% if @orders %>
+<table border="1">
   <% @orders.each do |order| %>
+  <tr>
+  <td>
+  <p>Order ID: <%= order.id %></p>
   <p>User ID: <%= order.user_id %></p>
   <p>Card No: <%= order.card_no %></p>
   <p>Line Items: </p>
@@ -10,4 +13,7 @@
     <% end %>
   </ul>
   <% end %>
-<% end %>
+  </td>
+  </tr>
+</table>
+<%= link_to "Main Menu", root_path %>

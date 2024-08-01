@@ -1,4 +1,4 @@
-<h2>All Products</h2>
+<h2>Search Results</h2>
 <table border="1">
 
 <% @products.each do |product| %>
@@ -12,19 +12,5 @@
     </td></tr>
 <% end%>
 </table>
-<br>
-<%#= form_for @products, url: products_search_path do |f| %>
-<!--  <p>-->
-<!--    <%#= f.label :Search %><br>-->
-    <%#= f.text_field :query, required: true, placeholder: "Enter search query" %>
-<!--  </p>-->
-<!--  <p>-->
-    <%#= f.submit %>
-<!--  </p>-->
-<%# end %>
-
-<%= form_tag products_search_path, method: :get do %>
-  <%= text_field_tag :query %>
-  <%= submit_tag 'Search'%>
-<% end %>
+<%= link_to "Back to all products", products_path %><br>
 <%= link_to "Main Menu", root_path %>

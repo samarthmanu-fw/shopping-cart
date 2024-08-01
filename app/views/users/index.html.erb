@@ -1,8 +1,5 @@
-<h1>Users#index</h1>
-
-<%= link_to 'New User', new_user_path %>
-
-<table>
+<h2>All User details</h2>
+<table border="1">
   <thead>
   <tr>
     <th>id</th>
@@ -20,3 +17,5 @@
   <% end %>
   </tbody>
 </table>
+<%= link_to 'New User', new_user_path %>
+<%= link_to "Back", :back %>

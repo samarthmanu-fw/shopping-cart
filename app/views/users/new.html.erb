@@ -1,4 +1,6 @@
-<h1>Users#new</h1>
+<h2>New User</h2>
+<table border="1">
+  <tr><td>
 <%= form_for(@user) do |f| %>
   <% if @user.errors.any? %>
     <div>
@@ -22,11 +24,15 @@
     <%= f.password_field :password_confirmation %>
   </div>
   <div class="field">
-    <%= f.label "is_admin" %> <br />
+<!--    <%#= f.label "is_admin" %> <br />-->
 <!--    <%#= f.check_box :is_admin, {}, true, false %> <br />-->
+    <%= f.label :is_admin %><br>
     <%= f.text_field :is_admin %>
   </div>
   <p>
     <%= f.submit %>
   </p>
 <% end %>
+</td></tr>
+</table>
+<%= link_to "Back", :back %>

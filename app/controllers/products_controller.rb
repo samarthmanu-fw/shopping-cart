@@ -1,14 +1,20 @@
 class ProductsController < ApplicationController
+
+  before_action :check_login
   def index
-    if current_user.blank?
-      render plain: '401 Unauthorized', status: :unauthorized
-    else
       @products = Product.all
-    end
+  end
+
+  def search
+    @products = Product.where("name LIKE ?", "%#{params[:query]}%")
   end
 
   def new
-    @product = Product.new
+    if(@current_user.is_admin)
+      @product = Product.new
+    else
+      render plain: '401 Unauthorized', status: :unauthorized
+    end
   end
 
   def create

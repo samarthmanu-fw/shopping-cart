@@ -1,4 +1,7 @@
 class CartsController < ApplicationController
+
+  before_action :check_login
+
   def show
     @cart = @current_cart
   end

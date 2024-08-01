@@ -1,13 +1,18 @@
 <% if current_user %>
-  <h1>Welcome, <%= current_user.name %></h1>
+  <h2>Welcome, <%= current_user.name %></h2>
   <%= link_to 'Log out', user_session_path(current_user), data: { method: :delete } %><br>
-  <%= link_to 'Start Shopping', products_path %><br>
-  <%= link_to 'All orders (admin)', orders_index_path %><br>
-  <%= link_to 'My orders', orders_by_user_path(current_user) %><br>
-  <%= link_to 'My Top 3 orders', orders_summary_by_user_path(current_user, 3) %><br>
+  <% if current_user.is_admin %>
+    <%= link_to 'All orders (admin)', orders_index_path %><br>
+    <%= link_to "New product (admin)", new_product_path %><br>
+    <%= link_to 'Top ordered items (admin)', orders_summary_by_user_path('all') %><br>
+  <% else %>
+    <%= link_to 'Start Shopping', products_path %><br>
+    <%= link_to 'My orders', orders_by_user_path(current_user) %><br>
+    <%= link_to 'My top ordered items', orders_summary_by_user_path(current_user) %><br>
+  <% end %>
 <% else %>
-  <h1>Welcome page</h1>
+  <h2>Welcome</h2>
   <%= link_to 'Login', new_user_session_path %><br>
   <%= link_to 'Register', users_new_url %><br>
 <% end %>
-<%= link_to 'Secret page', '/pages/secret' %>
+<%#= link_to 'Secret page', '/pages/secret' %>

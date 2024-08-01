@@ -1,6 +1,9 @@
 class UsersController < ApplicationController
+
+  before_action :check_login, only: [:index, :show, :update, :destroy]
+
   def index
-    @users = User.all
+      @users = User.all
   end
 
   def new
@@ -11,8 +14,8 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
+      redirect_to root_path
       flash[:notice] = "User created successfully"
-      redirect_to users_path
     else
       flash[:alert] = "User not created"
       render :new, status: :unprocessable_entity

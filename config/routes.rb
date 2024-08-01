@@ -1,10 +1,34 @@
 Rails.application.routes.draw do
 
+  root 'pages#index'
+
+  get 'carts/show'
+
+  get 'carts/:id' => "carts#show", as: "cart"
+
+  delete 'carts/:id' => "carts#destroy"
+
+  get 'products/search' => "products#search", as: "products_search"
+
+  post 'line_items/:id/add' => "line_items#add_quantity", as: "line_item_add"
+
+  post 'line_items/:id/reduce' => "line_items#reduce_quantity", as: "line_item_reduce"
+
+  post 'line_items' => "line_items#create"
+
+  get 'line_items/:id' => "line_items#show", as: "line_item"
+
+  delete 'line_items/:id' => "line_items#destroy"
+
   get 'orders/index'
 
   get 'orders/show'
 
   get 'orders/new'
+
+  get 'orders/users/:id' => "orders#show_by_user", as: "orders_by_user"
+
+  get 'orders/users/:id/summary' => "orders#show_summary_by_user", as: "orders_summary_by_user"
 
   get 'user_sessions/new'
 
@@ -16,49 +40,11 @@ Rails.application.routes.draw do
 
   get 'users/create'
 
-  # root 'products#index'
-  Rails.application.routes.draw do
-  get 'orders/index'
-
-  get 'orders/show'
-
-  get 'orders/new'
-
-  root 'pages#index'
   get 'pages/secret'
-    resources :user_sessions, only: [:new, :create, :destroy]
-    resources :users, only: [:index, :new, :create]
-  end
 
-
-  get 'carts/:id' => "carts#show", as: "cart"
-  delete 'carts/:id' => "carts#destroy"
-
-  post 'line_items/:id/add' => "line_items#add_quantity", as: "line_item_add"
-  post 'line_items/:id/reduce' => "line_items#reduce_quantity", as: "line_item_reduce"
-  post 'line_items' => "line_items#create"
-  get 'line_items/:id' => "line_items#show", as: "line_item"
-  delete 'line_items/:id' => "line_items#destroy"
-
-  Rails.application.routes.draw do
-  get 'orders/index'
-
-  get 'orders/show'
-
-  get 'orders/users/:id' => "orders#show_by_user", as: "orders_by_user"
-
-  get 'orders/users/:id/summary/:limit' => "orders#show_summary_by_user", as: "orders_summary_by_user"
-
-  get 'orders/new'
-
-  get 'carts/show'
-
-  get 'user_sessions/new'
-
-  get 'user_sessions/create'
-    resources :users, only: [:index, :new, :create]
-  end
-
+  resources :user_sessions, only: [:new, :create, :destroy]
+  resources :users, only: [:index, :new, :create, :custom_action]
+  resources :users, only: [:index, :new, :create]
   resources :products
   resources :orders
 
